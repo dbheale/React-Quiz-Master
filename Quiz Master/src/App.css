@@ -6,7 +6,7 @@
 }
 
 .logo {
-  position: absolute;
+  position: fixed;
   left: 0;
   bottom: 0;
   max-height: 100px;
@@ -16,6 +16,7 @@
   padding: 2em;
 }
 
-.read-the-docs {
-  color: #888;
+.flex-span {
+  display: flex;
+  justify-content: space-between;
 }

@@ -17,26 +17,13 @@ export const categories: Array<OptionValue> = [
     description: "Focused on concepts like arrays, linked lists, trees, sorting algorithms, and complexity analysis.",
   },
   {
-    label: "Database Management",
-    value: "dm",
-    description: "Covers SQL, NoSQL, normalization, transactions, and database design principles.",
-  },
-  {
-    label: "Software Engineering",
-    value: "se",
-    description: "Focus on software development methodologies, design patterns, testing, and version control.",
-  },
-  {
-    label: "Networking",
-    value: "n",
-    description: "Questions about protocols, TCP/IP, network layers, routing, and cybersecurity.",
-  },
-  {
     label: "Web Development",
     value: "wd",
     description: "Topics include HTML, CSS, JavaScript, front-end frameworks, and web protocols.",
   },
-];export const difficulties: Array<OptionValue> = [
+];
+
+export const difficulties: Array<OptionValue> = [
   {
     label: undefined,
     value: undefined,
@@ -56,13 +43,9 @@ export const categories: Array<OptionValue> = [
     label: "Hard",
     value: "h",
     description: "I hope you know your stuff.",
-  },
-  {
-    label: "Impossible",
-    value: "i",
-    description: "Good luck. 🤣",
-  },
+  }
 ];
+
 export const types: Array<OptionValue> = [
   {
     label: undefined,
@@ -79,17 +62,8 @@ export const types: Array<OptionValue> = [
     value: "tf",
     description: "It's either true or false!",
   },
-  {
-    label: "Short Answer",
-    value: "sa",
-    description: "Try your best, but I don't have a good algorithm to see if you're right.",
-  },
-  {
-    label: "Fill in the Blank",
-    value: "fib",
-    description: "Just one word, and you have to fill it in.",
-  },
 ];
+
 export const times: Array<OptionValue> = [
   {
     label: undefined,

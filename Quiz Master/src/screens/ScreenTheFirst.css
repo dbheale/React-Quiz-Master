@@ -1,11 +1,3 @@
-.card {
-  padding: 2em;
-}
-
-.flex-span {
-  display: flex;
-}
-
 .wrapper p {
   display: flex;
   align-items: center;
