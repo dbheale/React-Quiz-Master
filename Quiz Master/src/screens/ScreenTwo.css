@@ -1,7 +1,17 @@
-.answer-wrap{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-left: 20px;
-    margin-bottom: 10px;
+.answer-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.wrapper p {
+  text-align: left;
 }
