@@ -90,7 +90,7 @@ const ScreenTheFirst = () => {
       />
       <DescriptiveSelectList
         onChange={timeChanged}
-        value={time}
+        value={time.toString()}
         id={"time"}
         label={"Time"}
         optionValues={times}
