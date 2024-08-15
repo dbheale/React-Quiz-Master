@@ -1,4 +1,5 @@
-import { GameOptions } from "../GameOptions";
+import { useContext } from "react";
+import { GameContext, GameOptions } from "../GameContext";
 import { Questions } from "../Question";
 import "./ScreenTwo.css"
 
@@ -7,6 +8,8 @@ export interface ScreenTwoArgs {
 }
 
 const ScreenTwo = (args: ScreenTwoArgs) => {
+  const context = useContext(GameContext);
+
   const questions = Questions.filter(
     (f) =>
       f.category === args.options.category &&
@@ -14,6 +17,7 @@ const ScreenTwo = (args: ScreenTwoArgs) => {
       f.type === args.options.type
   );
 
+  // randomize it
   for (let i = questions.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [questions[i], questions[j]] = [questions[j], questions[i]];
@@ -42,7 +46,7 @@ const ScreenTwo = (args: ScreenTwoArgs) => {
       ))}
       <span className="flex-span">
         <div className="card">
-          <button>Back</button>
+          <button onClick={() => context.setPage(0)}>Back</button>
         </div>
         <div className="card">
           <button>Submit</button>

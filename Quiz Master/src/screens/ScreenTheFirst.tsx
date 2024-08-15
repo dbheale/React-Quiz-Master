@@ -1,20 +1,17 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useContext, useState } from "react";
 import "./ScreenTheFirst.css";
 import { DescriptiveSelectList } from "../DescriptiveSelectList";
 import { categories, difficulties, types, times } from "../ValueOptions";
-import { GameOptions } from "../GameOptions";
+import { GameContext } from "../GameContext";
 import { Category, Difficulty, QuestionType } from "../Question";
 
-export interface ScreenTheFirstArgs{
-  onStartGame: (options: GameOptions) => void
-}
-
-const ScreenTheFirst = (args: ScreenTheFirstArgs) => {
-  const [numberOfQuestions, setNumberOfQuestions] = useState(5);
-  const [category, setCategory] = useState<Category>();
-  const [difficulty, setDifficulty] = useState<Difficulty>();
-  const [type, setType] = useState<QuestionType>();
-  const [time, setTime] = useState<number>(1);
+const ScreenTheFirst = () => {
+  const context = useContext(GameContext);
+  const [numberOfQuestions, setNumberOfQuestions] = useState(context.options.questionCount);
+  const [category, setCategory] = useState<Category|undefined>(context.options.category);
+  const [difficulty, setDifficulty] = useState<Difficulty|undefined>(context.options.difficulty);
+  const [type, setType] = useState<QuestionType|undefined>(context.options.type);
+  const [time, setTime] = useState<number>(context.options.timeLimit);
 
   const numberChanged = (e: ChangeEvent<HTMLInputElement>) => {
     setNumberOfQuestions(Number.parseInt(e.target.value));
@@ -40,19 +37,20 @@ const ScreenTheFirst = (args: ScreenTheFirstArgs) => {
     if (
       !type ||
       !category ||
-      !difficulty ||
-      typeof args.onStartGame !== "function"
+      !difficulty
     ) {
       return;
     }
 
-    args.onStartGame({
+    context.setGameOptions({
       questionCount: numberOfQuestions,
       timeLimit: time,
       type: type,
       category: category,
       difficulty: difficulty,
     });
+
+    context.setPage(1);
   };
 
   return (

@@ -11,17 +11,23 @@ export interface SelectListOptions {
   optionValues: Array<OptionValue>;
   label: string;
   id: string;
-  value: any;
+  value: string | undefined;
 }
 
 export const DescriptiveSelectList = (options: SelectListOptions) => {
-  const [description, setDescription] = useState<string | undefined>();
+  const getDescription = (val: string | undefined) => {
+    return options.optionValues.find((s) => s.value == val)?.description;
+  };
+
+  const [description, setDescription] = useState<string | undefined>(
+    getDescription(options.value)
+  );
+
   const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setDescription(
-      options.optionValues.find((s) => s.value == e.target.value)?.description
-    );
+    setDescription(getDescription(e.target.value));
     options.onChange(e);
   };
+  
   return (
     <>
       <p>
