@@ -1,9 +1,15 @@
 .answer-wrap {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  flex-direction: row;
+  flex-wrap: wrap;
   margin-left: 20px;
   margin-bottom: 10px;
+}
+
+.answer-wrap button{
+  margin: 5px;
+  flex: 45%;
+  font-size: smaller;
 }
 
 .wrapper {
