@@ -1,13 +1,13 @@
-import { ChangeEvent, useContext, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { DescriptiveSelectList } from "../DescriptiveSelectList";
 import { categories, difficulties, types, times } from "../ValueOptions";
-import { GameContext } from "../GameContext";
 import { Category, Difficulty, QuestionType } from "../Question";
+import { useGameContext } from "../hooks/GameContext";
 import ChangePage from "../ChangePage";
 import "./ScreenTheFirst.css";
 
 const ScreenTheFirst = () => {
-  const context = useContext(GameContext);
+  const context = useGameContext();
   const [numberOfQuestions, setNumberOfQuestions] = useState(
     context.options.questionCount
   );

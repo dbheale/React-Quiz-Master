@@ -1,14 +1,15 @@
-import { useContext } from "react";
-import { GameContext } from "./GameContext";
+import { useGameContext } from "./hooks/GameContext";
 
 const ChangePage = (args: { text: string, pageIndex: number, beforeChange?: () => void, afterChange?: () => void }) => {
-  const context = useContext(GameContext);
+  const context = useGameContext();
 
   const buttonClicked = (_: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if(args.beforeChange){
       args.beforeChange();
     }
+    
     context.setPage(args.pageIndex)
+
     if(args.afterChange){
       args.afterChange();
     }

@@ -10,7 +10,6 @@ const QuestionTimer: React.FC<QuestionTimerArgs> = ({ onExpiry, timeInMinutes })
   const timerId = useRef<number | null>(null);
 
   useEffect(() => {
-
     timerId.current = window.setInterval(() => {
       setTime((prevTime) => {
         return prevTime - 1;

@@ -1,12 +1,11 @@
-import { useContext } from "react";
-import { GameContext } from "./GameContext";
+import { useGameContext } from "./hooks/GameContext";
 import FinaleScreen from "./screens/FinaleScreen";
 import ScreenTheFirst from "./screens/ScreenTheFirst";
 import ScreenTwo from "./screens/ScreenTwo";
 import ThirdScreen from "./screens/ThirdScreen";
 
 const Pager = () => {
-  const gameContext = useContext(GameContext);
+  const gameContext = useGameContext();
   return (
     <div>
       {gameContext.page == 0 ? <ScreenTheFirst /> : undefined}
