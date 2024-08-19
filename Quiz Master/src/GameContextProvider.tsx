@@ -6,7 +6,6 @@ import {
   Question,
   Questions,
 } from "./Question";
-import { categories, difficulties, times, types } from "./ValueOptions";
 
 const defaultOptions = {
   questionCount: 5,
