@@ -3,7 +3,7 @@ import { DescriptiveSelectList } from "../DescriptiveSelectList";
 import { categories, difficulties, types, times } from "../ValueOptions";
 import { Category, Difficulty, QuestionType } from "../Question";
 import { useGameContext } from "../hooks/GameContext";
-import ChangePage from "../ChangePage";
+import ChangePageButton from "../ChangePageButton";
 import "./ScreenTheFirst.css";
 
 const ScreenTheFirst = () => {
@@ -44,7 +44,7 @@ const ScreenTheFirst = () => {
 
   const startGame = () => {
     if (!type || !category || !difficulty) {
-      return;
+      return false;
     }
 
     context.setGameOptions({
@@ -54,6 +54,8 @@ const ScreenTheFirst = () => {
       category: category,
       difficulty: difficulty,
     });
+    
+    return true;
   };
 
   return (
@@ -100,12 +102,8 @@ const ScreenTheFirst = () => {
       />
 
       <span className="flex-span">
-        <div className="card">
-          <ChangePage text={"Start quiz"} pageIndex={1} beforeChange={startGame} />
-        </div>
-        <div className="card">
-          <ChangePage text={"See my statistics"} pageIndex={3} />
-        </div>
+        <ChangePageButton text={"Start quiz"} pageIndex={1} beforeChange={startGame} />
+        <ChangePageButton text={"See my statistics"} pageIndex={3} />
       </span>
     </div>
   );

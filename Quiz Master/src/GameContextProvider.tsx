@@ -51,25 +51,32 @@ const GameContextProvider: FC<PropsWithChildren> = ({ children }) => {
     defaultGame.activeQuestion
   );
 
-  const setOptions = (options: GameOptions) => {
+  const resetQuestions = (options: GameOptions) => {
+    console.log("Resetting questions.")
     const questions = Questions.filter(
-      (f) =>
-        f.category === options.category &&
+      (f) => f.category === options.category &&
         f.difficulty === options.difficulty &&
         f.type === options.type
     );
-
+  
     // randomize it
     for (let i = questions.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [questions[i], questions[j]] = [questions[j], questions[i]];
     }
-
+  
     questions.length = options.questionCount;
+  
+    setQuestions(questions);
 
+    setActiveQuestion({ question: questions[0], number: 1 });
+  }
+
+  const setOptions = (options: GameOptions) => {
+    console.log("Setting game options.", options)
     setGameOptions(options);
 
-    setQuestions(questions);
+    resetQuestions(options);
   };
 
   const incrementQuestion = (current: ActiveQuestion | undefined) => {
@@ -83,14 +90,18 @@ const GameContextProvider: FC<PropsWithChildren> = ({ children }) => {
   };
 
   const setAnswer = (number: number, answer: boolean) => {
+    console.log("Setting answer.", number, answer)
     answers[number - 1] = answer;
     setAnswers(answers);
   };
 
   const setActivePage = (pageIndex: number): void => {
-    if (pageIndex == 1) {
+    console.log("Setting active page.", pageIndex)
+    if (pageIndex == 1 && questionSet.length > 0) {
+      console.log("Setting active question.", 1, questionSet[0])
       setActiveQuestion({ question: questionSet[0], number: 1 });
     }
+
     setPage(pageIndex);
   };
 
@@ -135,3 +146,4 @@ export interface GameOptions {
 }
 
 export default GameContextProvider;
+

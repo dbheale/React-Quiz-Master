@@ -7,7 +7,8 @@
 }
 
 .wrapper p.answer span {
-  max-width: 540px;
+  max-width: 440px;
+  margin-right: 10px;
 }
 
 .wrapper p label {

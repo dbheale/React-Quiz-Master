@@ -1,11 +1,12 @@
 import { useGameContext } from "./hooks/GameContext";
 
-const ChangePage = (args: { text: string, pageIndex: number, beforeChange?: () => void, afterChange?: () => void }) => {
+const ChangePageButton = (args: { text: string, pageIndex: number, className?: string, beforeChange?: () => boolean, afterChange?: () => void }) => {
   const context = useGameContext();
-
   const buttonClicked = (_: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if(args.beforeChange){
-      args.beforeChange();
+      if(!args.beforeChange()){
+        return;
+      }
     }
     
     context.setPage(args.pageIndex)
@@ -16,10 +17,10 @@ const ChangePage = (args: { text: string, pageIndex: number, beforeChange?: () =
   }
 
   return (
-    <div className="card">
+    <div className={`card ${args.className}`}>
       <button onClick={buttonClicked}>{args.text}</button>
     </div>
   );
 };
 
-export default ChangePage;
+export default ChangePageButton;

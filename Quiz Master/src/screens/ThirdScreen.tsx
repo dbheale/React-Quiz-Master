@@ -1,4 +1,4 @@
-import ChangePage from "../ChangePage";
+import ChangePageButton from "../ChangePageButton";
 import OptionSummary from "../OptionSummary";
 import { useGameContext } from "../hooks/GameContext";
 
@@ -18,12 +18,8 @@ const ThirdScreen = () => {
       </p>
       <OptionSummary />
       <span className="flex-span">
-        <div className="card">
-          <ChangePage text={"Restart"} pageIndex={1} />
-        </div>
-        <div className="card">
-          <ChangePage text={"Choose another quiz"} pageIndex={0} />
-        </div>
+        <ChangePageButton text={"Restart"} pageIndex={1} />
+        <ChangePageButton text={"Choose another quiz"} pageIndex={0} />
       </span>
     </>
   );

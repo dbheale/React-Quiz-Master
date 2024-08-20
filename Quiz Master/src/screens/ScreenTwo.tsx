@@ -2,7 +2,7 @@ import { useState } from "react";
 import QuestionTimer from "../QuestionTimer";
 import "./ScreenTwo.css";
 import ProgressBar from "../ProgressBar";
-import ChangePage from "../ChangePage";
+import ChangePageButton from "../ChangePageButton";
 import { useGameContext } from "../hooks/GameContext";
 
 const QuestionRenderer = () => {
@@ -18,7 +18,7 @@ const QuestionRenderer = () => {
     e: React.MouseEvent<HTMLButtonElement, MouseEvent> | undefined | null
   ) => {
     if (answerIsCorrect !== undefined) return; // not answered yet
-    
+
     if (context.activeQuestion?.question === undefined
       || context.activeQuestion?.number === undefined) return; // why is the state messed up?
 
@@ -82,7 +82,7 @@ const ScreenTwo = () => {
     <div className="wrapper">
       <QuestionRenderer />
       <span className="flex-span">
-        <ChangePage text={"End quiz"} pageIndex={0} />
+        <ChangePageButton text={"End quiz"} pageIndex={0} />
         <ProgressBar />
       </span>
     </div>
