@@ -54,7 +54,7 @@ const QuestionRenderer = () => {
       </div>
       {answerIsCorrect === undefined ? (
         <QuestionTimer
-          timeInMinutes={context.options.timeLimit}
+          timeInMinutes={context.options?.timeLimit??1}
           onExpiry={() => onAnswerSelected()}
         />
       ) : (
@@ -67,7 +67,7 @@ const QuestionRenderer = () => {
             ) : (
               <span>Wrong! {context.activeQuestion.question?.reason}</span>
             )}
-            {context.options.questionCount > (context.activeQuestion.number ?? 0)
+            {context.options?.questionCount ?? 0 > (context.activeQuestion.number ?? 0)
             ? <button onClick={nextQuestion}>Next Question =&gt;</button>
             : <button onClick={() => context.setPage(2)}>View Results</button>}
           </p>

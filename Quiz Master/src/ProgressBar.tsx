@@ -5,7 +5,7 @@ const ProgressBar = () => {
   const context = useGameContext();
   return (
     <div>
-      <span>{context.activeQuestion?.number}/{context.options.questionCount}</span>
+      <span>{context.activeQuestion?.number}/{context.options?.questionCount}</span>
     </div>
   );
 };

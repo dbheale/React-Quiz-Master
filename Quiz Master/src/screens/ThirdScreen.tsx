@@ -13,7 +13,7 @@ const ThirdScreen = () => {
         survived—here are your results!
       </p>
       <p>
-        You answered {correctAnswers} out of {gameContext.options.questionCount}{" "}
+        You answered {correctAnswers} out of {gameContext.options?.questionCount}{" "}
         questions correct.
       </p>
       <OptionSummary />

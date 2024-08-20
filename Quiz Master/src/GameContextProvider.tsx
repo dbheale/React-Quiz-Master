@@ -10,14 +10,11 @@ import {
 const defaultOptions = {
   questionCount: 5,
   timeLimit: 1,
-  category: undefined,
-  difficulty: undefined,
-  type: undefined,
 };
 
 type ActiveQuestion = {
-  question: Question | undefined;
-  number: number | undefined;
+  question?: Question;
+  number?: number;
 };
 
 const defaultGame = {
@@ -123,19 +120,19 @@ export interface Game {
   page: number;
   setPage: (p: number) => void;
   nextQuestion: () => void;
-  options: GameOptions;
+  options?: GameOptions;
   setGameOptions: (p: GameOptions) => void;
   setAnswer: (number: number, correct: boolean) => void;
   getResults: () => number;
-  activeQuestion: ActiveQuestion | undefined;
+  activeQuestion?: ActiveQuestion;
 }
 
 export interface GameOptions {
   questionCount: number;
   timeLimit: number;
-  category: Category | undefined;
-  difficulty: Difficulty | undefined;
-  type: QuestionType | undefined;
+  category?: Category;
+  difficulty?: Difficulty;
+  type?: QuestionType;
 }
 
 export default GameContextProvider;

@@ -9,18 +9,18 @@ import "./ScreenTheFirst.css";
 const ScreenTheFirst = () => {
   const context = useGameContext();
   const [numberOfQuestions, setNumberOfQuestions] = useState(
-    context.options.questionCount
+    context.options?.questionCount
   );
   const [category, setCategory] = useState<Category | undefined>(
-    context.options.category
+    context.options?.category
   );
   const [difficulty, setDifficulty] = useState<Difficulty | undefined>(
-    context.options.difficulty
+    context.options?.difficulty
   );
   const [type, setType] = useState<QuestionType | undefined>(
-    context.options.type
+    context.options?.type
   );
-  const [time, setTime] = useState<number>(context.options.timeLimit);
+  const [time, setTime] = useState<number>(context.options?.timeLimit ?? 1);
 
   const numberChanged = (e: ChangeEvent<HTMLInputElement>) => {
     setNumberOfQuestions(Number.parseInt(e.target.value));
@@ -48,13 +48,13 @@ const ScreenTheFirst = () => {
     }
 
     context.setGameOptions({
-      questionCount: numberOfQuestions,
+      questionCount: numberOfQuestions ?? 0,
       timeLimit: time,
       type: type,
       category: category,
       difficulty: difficulty,
     });
-    
+
     return true;
   };
 
