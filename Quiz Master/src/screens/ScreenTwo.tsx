@@ -15,7 +15,7 @@ const QuestionRenderer = () => {
   );
 
   const onAnswerSelected = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent> | undefined | null
+    e?: React.MouseEvent<HTMLButtonElement, MouseEvent>, value?: string
   ) => {
     if (answerIsCorrect !== undefined) return; // not answered yet
 
@@ -23,8 +23,8 @@ const QuestionRenderer = () => {
       || context.activeQuestion?.number === undefined) return; // why is the state messed up?
 
     let res = false;
-    if (e) { // the event is a user clicking on a button
-      res = context.activeQuestion.question.answer == e.currentTarget.innerHTML;
+    if (e && value) { // the event is a user clicking on a button
+      res = context.activeQuestion.question.answer == value;
     }
     context.setAnswer(context.activeQuestion.number, res);
     if (e === null) { // timed out so the event is null
@@ -47,7 +47,7 @@ const QuestionRenderer = () => {
       </p>
       <div className="answer-wrap">
         {context.activeQuestion.question?.options?.map((option, index) => (
-          <button onClick={onAnswerSelected} key={option + index}>
+          <button onClick={(e => onAnswerSelected(e, option))} key={option + index}>
             {option}
           </button>
         ))}
@@ -55,7 +55,7 @@ const QuestionRenderer = () => {
       {answerIsCorrect === undefined ? (
         <QuestionTimer
           timeInMinutes={context.options.timeLimit}
-          onExpiry={() => onAnswerSelected(null)}
+          onExpiry={() => onAnswerSelected()}
         />
       ) : (
         <span>
