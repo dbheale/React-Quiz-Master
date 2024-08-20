@@ -33,8 +33,10 @@ export const DescriptiveSelectList = (options: SelectListOptions) => {
       <p>
         <label htmlFor={options.id}>{options.label}: </label>
         <select value={options.value} onChange={onChange} id={options.id}>
-          {options.optionValues.map(({ value, label }, _index) => (
-            <option key={_index} value={value}>{label}</option>
+          {options.optionValues.map(({ value, label }) => (
+            <option key={value} value={value}>
+              {label}
+            </option>
           ))}
         </select>
       </p>
