@@ -28,7 +28,6 @@ const defaultGame = {
   nextQuestion: () => {},
   setAnswer: (_: number, __: boolean) => {},
   getResults: () => 0,
-  questions: new Array<Question>(),
   activeQuestion: { question: undefined, number: undefined },
 };
 
@@ -44,7 +43,7 @@ const GameContextProvider: FC<PropsWithChildren> = ({ children }) => {
   );
 
   const [questionSet, setQuestions] = useState<Question[]>(
-    defaultGame.questions
+    new Array<Question>()
   );
 
   const [activeQuestion, setActiveQuestion] = useState<ActiveQuestion>(
@@ -112,12 +111,10 @@ const GameContextProvider: FC<PropsWithChildren> = ({ children }) => {
         setPage: setActivePage,
         options: gameOptions,
         setGameOptions: setOptions,
-        questions: questionSet,
         nextQuestion: () => setActiveQuestion(incrementQuestion),
         setAnswer: setAnswer,
         getResults: () => answers.filter((f) => f === true).length,
         activeQuestion: activeQuestion,
-        
       }}
     >
       {children}
@@ -133,7 +130,6 @@ export interface Game {
   setGameOptions: (p: GameOptions) => void;
   setAnswer: (number: number, correct: boolean) => void;
   getResults: () => number;
-  questions: Question[];
   activeQuestion: ActiveQuestion | undefined;
 }
 
