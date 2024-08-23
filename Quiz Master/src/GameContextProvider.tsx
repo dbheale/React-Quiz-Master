@@ -136,4 +136,3 @@ export interface GameOptions {
 }
 
 export default GameContextProvider;
-
