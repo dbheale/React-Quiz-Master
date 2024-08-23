@@ -1,38 +1,28 @@
 import { createContext, PropsWithChildren, useState, FC } from "react";
-import {
-  Category,
-  Difficulty,
-  QuestionType,
-  Question,
-  Questions,
-} from "./Question";
+import { Game } from "./types/Game";
+import { GameOptions } from "./types/GameOptions";
+import { ActiveQuestion } from "./types/ActiveQuestion";
+import { Questions } from "./types/QuestionData";
+import { Question } from "./types/Question";
 
 const defaultOptions = {
   questionCount: 5,
   timeLimit: 1,
 };
 
-type ActiveQuestion = {
-  question?: Question;
-  number?: number;
-};
-
 const defaultGame = {
-  page: 0,
-  setPage: () => {},
   options: defaultOptions,
+  activeQuestion: { question: undefined, number: undefined },
+  reset: () => {},
   setGameOptions: () => {},
   nextQuestion: () => {},
   setAnswer: (_: number, __: boolean) => {},
   getResults: () => 0,
-  activeQuestion: { question: undefined, number: undefined },
 };
 
 export const GameContext = createContext<Game>(defaultGame);
 
 const GameContextProvider: FC<PropsWithChildren> = ({ children }) => {
-  const [page, setPage] = useState(defaultGame.page);
-
   const [answers, setAnswers] = useState<boolean[]>(new Array<boolean>());
 
   const [gameOptions, setGameOptions] = useState<GameOptions>(
@@ -88,24 +78,13 @@ const GameContextProvider: FC<PropsWithChildren> = ({ children }) => {
     setAnswers(answers);
   };
 
-  const setActivePage = (pageIndex: number): void => {
-
-    if (pageIndex == 1 && questionSet.length > 0) {
-
-      setActiveQuestion({ question: questionSet[0], number: 1 });
-    }
-
-    setPage(pageIndex);
-  };
-
   return (
     <GameContext.Provider
       value={{
-        page: page,
-        setPage: setActivePage,
         options: gameOptions,
         setGameOptions: setOptions,
         nextQuestion: () => setActiveQuestion(incrementQuestion),
+        reset: () => setActiveQuestion(incrementQuestion(undefined)),
         setAnswer: setAnswer,
         getResults: () => answers.filter((f) => f === true).length,
         activeQuestion: activeQuestion,
@@ -115,24 +94,5 @@ const GameContextProvider: FC<PropsWithChildren> = ({ children }) => {
     </GameContext.Provider>
   );
 };
-
-export interface Game {
-  page: number;
-  setPage: (p: number) => void;
-  nextQuestion: () => void;
-  options?: GameOptions;
-  setGameOptions: (p: GameOptions) => void;
-  setAnswer: (number: number, correct: boolean) => void;
-  getResults: () => number;
-  activeQuestion?: ActiveQuestion;
-}
-
-export interface GameOptions {
-  questionCount: number;
-  timeLimit: number;
-  category?: Category;
-  difficulty?: Difficulty;
-  type?: QuestionType;
-}
 
 export default GameContextProvider;

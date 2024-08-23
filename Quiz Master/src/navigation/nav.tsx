@@ -15,17 +15,17 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <ScreenTheFirst /> },
       {
-        path: "todos/:todoid",
+        path: "/quiz",
         element: <ScreenTwo />,
         // action: favoriteAction,
       },
       {
-        path: "todos/:todoid/edit",
+        path: "/results",
         element: <ThirdScreen />,
         // action: editAction,
       },
       {
-        path: "todos/:todoid/destroy",
+        path: "/stats",
         element: <FinaleScreen />,
         // action: destroyAction,
       },

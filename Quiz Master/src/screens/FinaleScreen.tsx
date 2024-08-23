@@ -4,7 +4,7 @@ const FinaleScreen = () => {
   return (
     <>
       <span className="flex-span">
-        <ChangePageButton text={"Return Home"} pageIndex={0} />
+        <ChangePageButton text={"Return Home"} page={'/'} />
       </span>
     </>
   );

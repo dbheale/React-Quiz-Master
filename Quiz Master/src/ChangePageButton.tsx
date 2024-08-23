@@ -1,24 +1,15 @@
-import { useGameContext } from "./hooks/GameContext";
+import { NavLink } from "react-router-dom";
 
-const ChangePageButton = (args: { text: string, pageIndex: number, className?: string, beforeChange?: () => boolean, afterChange?: () => void }) => {
-  const context = useGameContext();
-  const buttonClicked = (_: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    if(args.beforeChange){
-      if(!args.beforeChange()){
-        return;
-      }
-    }
-    
-    context.setPage(args.pageIndex)
-
-    if(args.afterChange){
-      args.afterChange();
-    }
-  }
-
+const ChangePageButton = (args: {
+  text: string;
+  page: string;
+  className?: string;
+  beforeChange?: () => boolean;
+  afterChange?: () => void;
+}) => {
   return (
     <div className={`card ${args.className}`}>
-      <button onClick={buttonClicked}>{args.text}</button>
+      <NavLink onClick={args.beforeChange} onChange={args.afterChange} to={args.page}><button>{args.text}</button></NavLink>
     </div>
   );
 };

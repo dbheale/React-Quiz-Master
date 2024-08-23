@@ -38,6 +38,7 @@ const QuestionRenderer = () => {
     setAnswerState(undefined);
     context.nextQuestion();
   }
+  console.log('count {}, number {}', context.options?.questionCount ?? 0,  (context.activeQuestion.number ?? 0));
 
   return (
     <div className="question-wrap">
@@ -67,9 +68,9 @@ const QuestionRenderer = () => {
             ) : (
               <span>Wrong! {context.activeQuestion.question?.reason}</span>
             )}
-            {context.options?.questionCount ?? 0 > (context.activeQuestion.number ?? 0)
+            {(context.options?.questionCount ?? 0) > (context.activeQuestion.number ?? 0)
             ? <button onClick={nextQuestion}>Next Question =&gt;</button>
-            : <button onClick={() => context.setPage(2)}>View Results</button>}
+            : <ChangePageButton text={"View Results"} page={'/results'} />}
           </p>
         </span>
       )}
@@ -82,7 +83,7 @@ const ScreenTwo = () => {
     <div className="wrapper">
       <QuestionRenderer />
       <span className="flex-span">
-        <ChangePageButton text={"End quiz"} pageIndex={0} />
+        <ChangePageButton text={"End quiz"} page={'/'} />
         <ProgressBar />
       </span>
     </div>

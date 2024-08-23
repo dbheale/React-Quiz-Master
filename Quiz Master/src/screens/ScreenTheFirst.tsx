@@ -1,8 +1,8 @@
 import { ChangeEvent, useState } from "react";
 import { DescriptiveSelectList } from "../DescriptiveSelectList";
 import { categories, difficulties, types, times } from "../ValueOptions";
-import { Category, Difficulty, QuestionType } from "../Question";
 import { useGameContext } from "../hooks/GameContext";
+import { Category, Difficulty, QuestionType } from "../types/Question";
 import ChangePageButton from "../ChangePageButton";
 import "./ScreenTheFirst.css";
 
@@ -102,8 +102,8 @@ const ScreenTheFirst = () => {
       />
 
       <span className="flex-span">
-        <ChangePageButton text={"Start quiz"} pageIndex={1} beforeChange={startGame} />
-        <ChangePageButton text={"See my statistics"} pageIndex={3} />
+        <ChangePageButton text={"Start quiz"} page={'quiz'} beforeChange={startGame} />
+        <ChangePageButton text={"See my statistics"} page={'stats'} />
       </span>
     </div>
   );
