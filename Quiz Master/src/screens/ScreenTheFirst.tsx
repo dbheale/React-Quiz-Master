@@ -3,11 +3,16 @@ import { DescriptiveSelectList } from "../DescriptiveSelectList";
 import { categories, difficulties, types, times } from "../ValueOptions";
 import { useGameContext } from "../hooks/GameContext";
 import { Category, Difficulty, QuestionType } from "../types/Question";
-import ChangePageButton from "../ChangePageButton";
+import ChangePageButton from "../components/ChangePageButton";
 import "./ScreenTheFirst.css";
+import { useDispatch } from "react-redux";
+import { playAudio } from "../store/slices/audioPlayerSlice";
 
 const ScreenTheFirst = () => {
+  const dispatch = useDispatch();
+
   const context = useGameContext();
+
   const [numberOfQuestions, setNumberOfQuestions] = useState(
     context.options?.questionCount
   );
@@ -41,6 +46,10 @@ const ScreenTheFirst = () => {
   const timeChanged = (e: ChangeEvent<HTMLSelectElement>) => {
     setTime(Number.parseInt(e.target.value));
   };
+  const scream = () =>{
+    dispatch(playAudio());
+    return true;
+  }
 
   const startGame = () => {
     if (!type || !category || !difficulty) {
@@ -102,8 +111,16 @@ const ScreenTheFirst = () => {
       />
 
       <span className="flex-span">
-        <ChangePageButton text={"Start quiz"} page={'quiz'} beforeChange={startGame} />
-        <ChangePageButton text={"See my statistics"} page={'stats'} />
+        <ChangePageButton
+          text={"Start quiz"}
+          page={"quiz"}
+          beforeChange={startGame}
+        />
+        <ChangePageButton
+          text={"See my statistics"}
+          page={"stats"}
+          beforeChange={scream}
+        />
       </span>
     </div>
   );

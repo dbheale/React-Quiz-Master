@@ -33,7 +33,7 @@ const GameContextProvider: FC<PropsWithChildren> = ({ children }) => {
     new Array<Question>()
   );
 
-  const [activeQuestion, setActiveQuestion] = useState<ActiveQuestion>(
+  const [activeQuestion,setActiveQuestion] = useState<ActiveQuestion>(
     defaultGame.activeQuestion
   );
 

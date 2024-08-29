@@ -6,6 +6,9 @@ import ThirdScreen from "../screens/ThirdScreen";
 import FinaleScreen from "../screens/FinaleScreen";
 import ErrorPage from "../screens/ErrorPage";
 import App from "../App";
+import { Provider } from "react-redux";
+import { store } from "../store";
+import AudioPlayer from "../components/Scream";
 
 const router = createBrowserRouter([
   {
@@ -34,5 +37,10 @@ const router = createBrowserRouter([
 ]);
 
 export const RootNavigation = () => {
-  return <RouterProvider router={router} />;
+  return (
+    <Provider store={store}>
+      <RouterProvider router={router} />
+      <AudioPlayer />
+    </Provider>
+  );
 };

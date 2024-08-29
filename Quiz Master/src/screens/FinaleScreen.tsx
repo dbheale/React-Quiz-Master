@@ -1,4 +1,4 @@
-import ChangePageButton from "../ChangePageButton";
+import ChangePageButton from "../components/ChangePageButton";
 
 const FinaleScreen = () => {
   return (
