@@ -20,17 +20,14 @@ const router = createBrowserRouter([
       {
         path: "/quiz",
         element: <ScreenTwo />,
-        // action: favoriteAction,
       },
       {
         path: "/results",
         element: <ThirdScreen />,
-        // action: editAction,
       },
       {
         path: "/stats",
         element: <FinaleScreen />,
-        // action: destroyAction,
       },
     ],
   },
