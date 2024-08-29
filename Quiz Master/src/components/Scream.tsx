@@ -1,10 +1,11 @@
 import React, { useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store';
+import { resetAudio } from '../store/slices/audioPlayerSlice';
 
 const AudioPlayer: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
-
+  const dispatch = useDispatch();
   const { src, isPlaying } = useSelector((state: RootState) => state.audioPlayer);
 
   useEffect(() => {
@@ -23,6 +24,24 @@ const AudioPlayer: React.FC = () => {
       audioRef.current.load();
     }
   }, [src]);
+
+  useEffect(() => {
+    const handleEnded = () => {
+      dispatch(resetAudio());
+    };
+
+    const audioElement = audioRef.current;
+    
+    if (audioElement) {
+      audioElement.addEventListener('ended', handleEnded);
+    }
+
+    return () => {
+      if (audioElement) {
+        audioElement.removeEventListener('ended', handleEnded);
+      }
+    };
+  }, [dispatch]);
 
   return (
     <div>

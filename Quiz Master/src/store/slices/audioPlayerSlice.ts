@@ -17,8 +17,11 @@ const audioPlayerSlice = createSlice({
     playAudio: (state) => {
       state.isPlaying = true;
     },
+    resetAudio: (state) =>{
+      state.isPlaying = false;
+    }
   },
 });
 
-export const { playAudio } = audioPlayerSlice.actions;
+export const { playAudio, resetAudio } = audioPlayerSlice.actions;
 export default audioPlayerSlice.reducer;
