@@ -20,7 +20,6 @@ const AudioPlayer: React.FC = () => {
 
   useEffect(() => {
     const handleEnded = () => {
-      console.log("audio reset");
       dispatch(resetAudio());
     };
 

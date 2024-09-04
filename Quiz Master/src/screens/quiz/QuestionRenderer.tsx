@@ -15,10 +15,6 @@ const QuestionRenderer = () => {
   const [isAnswered, setIsAnswered] = useState(false);
 
   useEffect(() => {
-console.log("effect", audioPlaying
-  , game.questions
-  , game.activeQuestion
-  , game.answers)
 
     if (!audioPlaying
       && !game.loading
@@ -29,9 +25,6 @@ console.log("effect", audioPlaying
       const nextIndex = game.activeQuestion.id + 1;
       setIsAnswered(false);
       if (game.questions.length > nextIndex) {
-        console.log(
-          "Dispatching next question."
-        );
         dispatch(
           updateActiveQuestion(game.questions[nextIndex])
         );

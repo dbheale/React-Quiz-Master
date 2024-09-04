@@ -4,7 +4,6 @@ import { RootState } from "../../store";
 const ProgressBar = () => {
   const answers = useSelector((state: RootState) => state.game.answers);
 
-  console.log(answers);
   return (
     <div className="progress-wrap">
       {answers?.slice().reverse().map((q) => {

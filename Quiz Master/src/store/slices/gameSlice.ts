@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { Answer, Game } from "../../types/Game";
 import { RootState } from "..";
-import { Question } from "../../types/Question";
-import { ActiveQuestion } from "../../types/ActiveQuestion";
+import { Difficulty, Question, QuestionType } from "../../types/Question";
 import { playAudio, Sounds } from "./audioPlayerSlice";
+import { updateStatistics } from "./statisticsSlice";
 
 const initialState: Game = {
   answers: new Array(),
@@ -80,15 +80,13 @@ export const answerQuestionThunk = createAsyncThunk<
   { state: RootState }
 >("game/answerQuestionThunk", async (answer, { dispatch, getState }) => {
   const state = getState().game;
-
-  console.log("Question has been answered.", answer);
-
   if (
     state.activeQuestion &&
     state.questions
   ) {
     const currentIndex = state.activeQuestion.id;
     const isCorrect = answer === state.activeQuestion?.answer;
+
     const audio = isCorrect ? Sounds.Correct : Sounds.Wrong;
     const newAnswers = [
       ...state.answers.slice(0, currentIndex),
@@ -99,9 +97,15 @@ export const answerQuestionThunk = createAsyncThunk<
       },
       ...state.answers.slice(currentIndex + 1),
     ];
-    console.log("Answers: ", newAnswers);
 
     dispatch(updateAnswers(newAnswers));
+    
+    dispatch(updateStatistics({
+      correct: isCorrect, 
+      difficulty: state.activeQuestion.difficulty as Difficulty,
+      type: state.activeQuestion.type as QuestionType,
+      category: state.activeQuestion.category
+    }))
 
     dispatch(playAudio(audio));
   }
@@ -136,21 +140,21 @@ const gameSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(startGameThunk.fulfilled, (state) => {
       state.loading = false;
-      console.log("Game started");
+      //console.log("Game started");
     });
     builder.addCase(startGameThunk.pending, (state) => {
       state.loading = true;
-      console.log("Game starting");
+      //console.log("Game starting");
     });
     builder.addCase(answerQuestionThunk.fulfilled, () => {
-      console.log("Question answered");
+      //console.log("Question answered");
     });
 
     builder.addCase(answerQuestionThunk.pending, () => {
-      console.log("Question is being answered...");
+      //console.log("Question is being answered...");
     });
     builder.addCase(answerQuestionThunk.rejected, (_, action) => {
-      console.log("Answer submission failed", action.error.message);
+      //console.log("Answer submission failed", action.error.message);
     });
   },
 });

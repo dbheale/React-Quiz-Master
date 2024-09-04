@@ -16,7 +16,6 @@ const settingsSlice = createSlice({
       state.questionCount = action.payload.questionCount;
       state.timeLimit = action.payload.timeLimit;
       state.type = action.payload.type;
-      console.log("game settings have been set.");
     },
     clearGameSettings: (state) => {
       state = initialState;
