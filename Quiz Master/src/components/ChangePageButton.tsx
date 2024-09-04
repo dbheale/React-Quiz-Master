@@ -50,6 +50,7 @@ const ChangePageButton = (args: {
           contentLabel="onRequestClose Example"
           onRequestClose={handleCloseModal}
           shouldCloseOnOverlayClick={true}
+          ariaHideApp={false}
         >
           <p>some text</p>
           <p>

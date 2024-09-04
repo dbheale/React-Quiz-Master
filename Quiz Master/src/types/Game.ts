@@ -1,13 +1,15 @@
-import { ActiveQuestion } from "./ActiveQuestion";
-import { GameOptions } from "./GameOptions";
+import { Question } from "./Question";
 
 
 export type Game = {
-  options?: GameOptions;
-  activeQuestion?: ActiveQuestion;
-  reset: () => void;
-  getResults: () => number;
-  nextQuestion: () => void;
-  setGameOptions: (p: GameOptions) => void;
-  setAnswer: (number: number, correct: boolean) => void;
+  activeQuestion?: Question;
+  questions?: Array<Question>;
+  answers: Array<Answer|undefined>;
+  loading: boolean;
+}
+
+export type Answer = {
+  questionId: number;
+  value: string;
+  correct: boolean;
 }
