@@ -154,7 +154,7 @@ const gameSlice = createSlice({
       //console.log("Question is being answered...");
     });
     builder.addCase(answerQuestionThunk.rejected, (_, action) => {
-      //console.log("Answer submission failed", action.error.message);
+      console.log("Answer submission failed", action.error.message);
     });
   },
 });
