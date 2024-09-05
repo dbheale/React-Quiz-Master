@@ -4,6 +4,7 @@ import { RootState } from "../../store";
 
 const OptionSummary = () => {
   const gameSettings = useSelector((state: RootState) => state.settings);
+  const categories = useSelector((state: RootState) => state.categories.categories);
   return (
     <div className="config-summary">
       <p>Config</p>
@@ -11,7 +12,7 @@ const OptionSummary = () => {
         Type: {types.find((f) => f.value == gameSettings?.type)?.label ?? "Any"}
       </p>
       <p>
-        Category: {gameSettings?.category ?? "Any"}
+        Category: {categories.find(f => f.value == gameSettings?.category)?.label ?? "Any"}
       </p>
       <p>
         Time: {times.find((f) => f.value == gameSettings?.timeLimit)?.label ?? "Any"}
