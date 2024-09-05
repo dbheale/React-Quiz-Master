@@ -6,16 +6,16 @@ const ProgressBar = () => {
 
   return (
     <div className="progress-wrap">
-      {answers?.slice().reverse().map((q) => {
-        if (!q) {
-          return <div key={q} className="question"></div>;
-        }
-        return (
-          <div
-            className={q.correct ? "question correct" : "question incorrect"}
-          ></div>
-        );
-      })}
+      {answers
+        ?.slice()
+        .reverse()
+        .map((q, i) =>
+          q ? (
+            <div key={"q_" + q.questionId} className={q.correct ? "question correct" : "question incorrect"}></div>
+          ) : (
+            <div key={"uq_" + i} className="question"></div>
+          )
+        )}
     </div>
   );
 };
