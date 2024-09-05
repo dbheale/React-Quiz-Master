@@ -1,6 +1,6 @@
 import "./ScreenTheFirst.css";
 import ChangePageButton from "../../components/ChangePageButton";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { DescriptiveSelectList } from "../../components/DescriptiveSelectList";
 import { difficulties, types, times } from "../../constants/ValueOptions";
 import { Difficulty, QuestionCounts, QuestionType } from "../../types/Question";
@@ -10,16 +10,12 @@ import { Routes } from "../../constants/routes";
 import { setGameSettings } from "../../store/slices/settingsSlice";
 import { AppDispatch, RootState } from "../../store";
 import { startGameThunk } from "../../store/slices/gameSlice";
-import { fetchCategories } from "../../store/slices/categoriesSlice";
 
 const ScreenTheFirst = () => {
   const dispatch: AppDispatch = useDispatch();
   const settings = useSelector((state: RootState) => state.settings);
   const categoryState = useSelector((state: RootState) => state.categories);
   const categories = [...categoryState.categories];
-  useEffect(() => {
-    dispatch(fetchCategories());
-  }, []);
 
   const [numberOfQuestions, setNumberOfQuestions] = useState(settings.questionCount);
   const [category, setCategory] = useState<string | undefined>(settings.category);
