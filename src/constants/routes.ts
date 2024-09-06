@@ -1,8 +1,8 @@
-const base = window.location.pathname.split("/").slice(0, -1).join("/");
+import { BaseRoute } from "./BaseRoute";
 
 export const Routes = {
-    Home: base + "/",
-    Quiz: base + "/quiz",
-    Results: base + "/results",
-    Statistics: base + "/stats"
+    Home: BaseRoute + "/",
+    Quiz: BaseRoute + "/quiz",
+    Results: BaseRoute + "/results",
+    Statistics: BaseRoute + "/stats"
 }

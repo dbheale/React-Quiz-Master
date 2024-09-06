@@ -1,7 +1,9 @@
+import { BaseRoute } from "./BaseRoute";
+
 export const Sounds = {
-  BadSummary: "./src/assets/bad-summary.mp3",
-  Correct: "./src/assets/correct.mp3",
-  Scream: "./src/assets/scream.mp3",
-  Summary: "./src/assets/summary.mp3",
-  Wrong: "./src/assets/wrong.mp3",
+  BadSummary: BaseRoute + "/assets/bad-summary.mp3",
+  Correct:  BaseRoute + "/assets/correct.mp3",
+  Scream:  BaseRoute + "/assets/scream.mp3",
+  Summary:  BaseRoute + "/assets/summary.mp3",
+  Wrong:  BaseRoute + "/assets/wrong.mp3",
 };
