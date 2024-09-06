@@ -1,5 +1,5 @@
 import "./App.css";
-import { GameContextProvider } from "./GameContext";
+import GameContextProvider from "./GameContextProvider";
 import Pager from "./Pager";
 
 const App = () => {

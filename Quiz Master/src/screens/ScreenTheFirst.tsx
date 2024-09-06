@@ -1,26 +1,26 @@
-import { ChangeEvent, useContext, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { DescriptiveSelectList } from "../DescriptiveSelectList";
 import { categories, difficulties, types, times } from "../ValueOptions";
-import { GameContext } from "../GameContext";
 import { Category, Difficulty, QuestionType } from "../Question";
-import ChangePage from "../ChangePage";
+import { useGameContext } from "../hooks/GameContext";
+import ChangePageButton from "../ChangePageButton";
 import "./ScreenTheFirst.css";
 
 const ScreenTheFirst = () => {
-  const context = useContext(GameContext);
+  const context = useGameContext();
   const [numberOfQuestions, setNumberOfQuestions] = useState(
-    context.options.questionCount
+    context.options?.questionCount
   );
   const [category, setCategory] = useState<Category | undefined>(
-    context.options.category
+    context.options?.category
   );
   const [difficulty, setDifficulty] = useState<Difficulty | undefined>(
-    context.options.difficulty
+    context.options?.difficulty
   );
   const [type, setType] = useState<QuestionType | undefined>(
-    context.options.type
+    context.options?.type
   );
-  const [time, setTime] = useState<number>(context.options.timeLimit);
+  const [time, setTime] = useState<number>(context.options?.timeLimit ?? 1);
 
   const numberChanged = (e: ChangeEvent<HTMLInputElement>) => {
     setNumberOfQuestions(Number.parseInt(e.target.value));
@@ -44,16 +44,18 @@ const ScreenTheFirst = () => {
 
   const startGame = () => {
     if (!type || !category || !difficulty) {
-      return;
+      return false;
     }
 
     context.setGameOptions({
-      questionCount: numberOfQuestions,
+      questionCount: numberOfQuestions ?? 0,
       timeLimit: time,
       type: type,
       category: category,
       difficulty: difficulty,
     });
+
+    return true;
   };
 
   return (
@@ -100,12 +102,8 @@ const ScreenTheFirst = () => {
       />
 
       <span className="flex-span">
-        <div className="card">
-          <ChangePage text={"Start quiz"} pageIndex={1} beforeChange={startGame} />
-        </div>
-        <div className="card">
-          <ChangePage text={"See my statistics"} pageIndex={3} />
-        </div>
+        <ChangePageButton text={"Start quiz"} pageIndex={1} beforeChange={startGame} />
+        <ChangePageButton text={"See my statistics"} pageIndex={3} />
       </span>
     </div>
   );

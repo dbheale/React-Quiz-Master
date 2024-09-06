@@ -1,12 +1,10 @@
-import ChangePage from "../ChangePage";
+import ChangePageButton from "../ChangePageButton";
 
 const FinaleScreen = () => {
   return (
     <>
       <span className="flex-span">
-        <div className="card">
-          <ChangePage text={"Return Home"} pageIndex={0} />
-        </div>
+        <ChangePageButton text={"Return Home"} pageIndex={0} />
       </span>
     </>
   );

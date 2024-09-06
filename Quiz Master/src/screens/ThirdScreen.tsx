@@ -1,16 +1,25 @@
-import ChangePage from "../ChangePage";
+import ChangePageButton from "../ChangePageButton";
+import OptionSummary from "../OptionSummary";
+import { useGameContext } from "../hooks/GameContext";
 
 const ThirdScreen = () => {
+  const gameContext = useGameContext();
+  const correctAnswers = gameContext.getResults();
   return (
     <>
-      <p>🍝</p>
+      <p>Quiz conquered! 🎉</p>
+      <p>
+        Thanks for hanging in there. Now, let's see how many brain cells
+        survived—here are your results!
+      </p>
+      <p>
+        You answered {correctAnswers} out of {gameContext.options?.questionCount}{" "}
+        questions correct.
+      </p>
+      <OptionSummary />
       <span className="flex-span">
-        <div className="card">
-          <ChangePage text={"Return Home"} pageIndex={0} />
-        </div>
-        <div className="card">
-          <ChangePage text={"See my statistics"} pageIndex={3} />
-        </div>
+        <ChangePageButton text={"Restart"} pageIndex={1} />
+        <ChangePageButton text={"Choose another quiz"} pageIndex={0} />
       </span>
     </>
   );
