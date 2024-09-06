@@ -3,6 +3,11 @@
   justify-content: space-between;
   margin: 0;
   width: 100%;
+  align-items: center;
+}
+
+.wrapper p.answer span {
+  max-width: 540px;
 }
 
 .wrapper p label {

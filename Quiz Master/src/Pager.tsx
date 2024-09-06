@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { GameContext } from "./GameContext";
-import BookEndScreen from "./screens/BookEndScreen";
+import FinaleScreen from "./screens/FinaleScreen";
 import ScreenTheFirst from "./screens/ScreenTheFirst";
 import ScreenTwo from "./screens/ScreenTwo";
 import ThirdScreen from "./screens/ThirdScreen";
@@ -10,11 +10,9 @@ const Pager = () => {
   return (
     <div>
       {gameContext.page == 0 ? <ScreenTheFirst /> : undefined}
-      {gameContext.page == 1 && gameContext.options !== undefined ? (
-        <ScreenTwo options={gameContext.options} />
-      ) : undefined}
+      {gameContext.page == 1 ? <ScreenTwo /> : undefined}
       {gameContext.page == 2 ? <ThirdScreen /> : undefined}
-      {gameContext.page == 3 ? <BookEndScreen /> : undefined}
+      {gameContext.page == 3 ? <FinaleScreen /> : undefined}
     </div>
   );
 };

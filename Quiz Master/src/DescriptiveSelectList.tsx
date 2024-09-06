@@ -27,14 +27,14 @@ export const DescriptiveSelectList = (options: SelectListOptions) => {
     setDescription(getDescription(e.target.value));
     options.onChange(e);
   };
-  
+
   return (
     <>
       <p>
         <label htmlFor={options.id}>{options.label}: </label>
         <select value={options.value} onChange={onChange} id={options.id}>
-          {options.optionValues.map(({ value, label }, _) => (
-            <option value={value}>{label}</option>
+          {options.optionValues.map(({ value, label }, _index) => (
+            <option key={_index} value={value}>{label}</option>
           ))}
         </select>
       </p>
