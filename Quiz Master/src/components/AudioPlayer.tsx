@@ -9,24 +9,18 @@ const AudioPlayer: React.FC = () => {
   const { src, isPlaying } = useSelector((state: RootState) => state.audioPlayer);
 
   useEffect(() => {
-    if (audioRef.current) {
+    if (audioRef.current && src) {
       if (isPlaying) {
+        audioRef.current.src = src;
+        audioRef.current.load();
         audioRef.current.play();
-      } else {
-        audioRef.current.pause();
       }
     }
-  }, [isPlaying]);
-
-  useEffect(() => {
-    if (audioRef.current && src) {
-      audioRef.current.src = src;
-      audioRef.current.load();
-    }
-  }, [src]);
+  }, [isPlaying, src]);
 
   useEffect(() => {
     const handleEnded = () => {
+      console.log("audio reset");
       dispatch(resetAudio());
     };
 

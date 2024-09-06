@@ -3,7 +3,7 @@ import { ChangeEvent, useState } from "react";
 export interface OptionValue {
   label: string | undefined;
   value: any;
-  description: string | undefined;
+  description?: string;
 }
 
 export interface SelectListOptions {
@@ -33,8 +33,8 @@ export const DescriptiveSelectList = (options: SelectListOptions) => {
       <p>
         <label htmlFor={options.id}>{options.label}: </label>
         <select value={options.value} onChange={onChange} id={options.id}>
-          {options.optionValues.map(({ value, label }) => (
-            <option key={value} value={value}>
+          {options.optionValues.map(({ value, label }, index) => (
+            <option key={index+value} value={value}>
               {label}
             </option>
           ))}
