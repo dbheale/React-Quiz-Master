@@ -2,7 +2,8 @@ import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { Answer, Game } from "../../types/Game";
 import { RootState } from "..";
 import { Difficulty, Question, QuestionType } from "../../types/Question";
-import { playAudio, Sounds } from "./audioPlayerSlice";
+import { playAudio } from "./audioPlayerSlice";
+import { Sounds } from "../../constants/Sounds";
 import { updateStatistics } from "./statisticsSlice";
 
 const initialState: Game = {

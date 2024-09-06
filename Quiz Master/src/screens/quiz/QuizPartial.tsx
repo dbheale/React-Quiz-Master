@@ -3,7 +3,7 @@ import ProgressBar from "./ProgressBar";
 import ChangePageButton from "../../components/ChangePageButton";
 import QuestionRenderer from "./QuestionRenderer";
 import QuestionTimer from "./QuestionTimer";
-import { Routes } from "../../constants/routes";
+import { Routes } from "../../constants/Routes";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { clearQuestions } from "../../store/slices/gameSlice";

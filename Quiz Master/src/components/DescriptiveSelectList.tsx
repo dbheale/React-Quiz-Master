@@ -14,6 +14,13 @@ export interface SelectListOptions {
   value: string | undefined;
 }
 
+export const getOptionValueLabel = (
+  optionValues: OptionValue[],
+  value: string | number | undefined
+) => {
+  return optionValues.find((f) => f.value == value)?.label ?? "Any";
+};
+
 export const DescriptiveSelectList = (options: SelectListOptions) => {
   const getDescription = (val: string | undefined) => {
     return options.optionValues.find((s) => s.value == val)?.description;
@@ -34,7 +41,7 @@ export const DescriptiveSelectList = (options: SelectListOptions) => {
         <label htmlFor={options.id}>{options.label}: </label>
         <select value={options.value} onChange={onChange} id={options.id}>
           {options.optionValues.map(({ value, label }, index) => (
-            <option key={index+value} value={value}>
+            <option key={index + value} value={value}>
               {label}
             </option>
           ))}

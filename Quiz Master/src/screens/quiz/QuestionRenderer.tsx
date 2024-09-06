@@ -3,7 +3,7 @@ import { AppDispatch } from "../../store";
 import { useDispatch, useSelector } from "react-redux";
 import { answerQuestionThunk, updateActiveQuestion } from "../../store/slices/gameSlice";
 import { useNavigate } from "react-router-dom";
-import { Routes } from "../../constants/routes";
+import { Routes } from "../../constants/Routes";
 import { decode } from "html-entities"
 import { audioPlayingSelector, gameSelector } from "../../store/selectors";
 

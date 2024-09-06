@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import ChangePageButton from "../../components/ChangePageButton";
-import { Routes } from "../../constants/routes";
+import { Routes } from "../../constants/Routes";
 import { resetStatistics } from "../../store/slices/statisticsSlice";
 import { statisticsSelector } from "../../store/selectors";
 

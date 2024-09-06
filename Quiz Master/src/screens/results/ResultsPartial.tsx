@@ -1,20 +1,31 @@
 import ChangePageButton from "../../components/ChangePageButton";
 import OptionSummary from "./OptionSummary";
-import { Routes } from "../../constants/routes";
+import { Routes } from "../../constants/Routes";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../store";
 import { clearQuestions, startGameThunk } from "../../store/slices/gameSlice";
 import { clearGameSettings } from "../../store/slices/settingsSlice";
 import { gameAnswersSelector, settingsQuestionCountSelector } from "../../store/selectors";
-import { playAudio, Sounds } from "../../store/slices/audioPlayerSlice";
+import { playAudio } from "../../store/slices/audioPlayerSlice";
+import { Sounds } from "../../constants/Sounds";
+import { useRef } from "react";
 
 const ResultsPartial = () => {
   const dispatch: AppDispatch = useDispatch();
   const answers = useSelector(gameAnswersSelector);
   const questionCount = useSelector(settingsQuestionCountSelector);
-  const correctAnswers = answers?.filter(f => f?.correct === true).length;
+  const correctAnswers = answers?.filter((f) => f?.correct === true).length;
+  const hasRendered = useRef(false);
 
-dispatch(playAudio(Sounds.Summary))
+  // Just using this so the audio doesn't play on rerender... I don't think it would, but just in case.
+  if(!hasRendered.current){
+
+    const sound = correctAnswers > questionCount / 2 ? Sounds.Summary : Sounds.BadSummary;
+  
+    dispatch(playAudio(sound));
+
+    hasRendered.current = true; 
+  }
 
   const resetQuestions = () => {
     dispatch(clearQuestions());
@@ -23,7 +34,7 @@ dispatch(playAudio(Sounds.Summary))
   };
 
   const clearGameData = () => {
-    dispatch(clearGameSettings())
+    dispatch(clearGameSettings());
     dispatch(clearQuestions());
     return true;
   };
@@ -47,7 +58,8 @@ dispatch(playAudio(Sounds.Summary))
         <ChangePageButton
           text={"Choose another quiz"}
           beforeChange={clearGameData}
-          page={Routes.Home} />
+          page={Routes.Home}
+        />
       </span>
     </>
   );

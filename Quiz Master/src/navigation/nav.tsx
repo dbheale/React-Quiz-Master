@@ -10,7 +10,7 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { store, persistor } from "../store";
 import AudioPlayer from "../components/AudioPlayer";
-import { Routes } from "../constants/routes";
+import { Routes } from "../constants/Routes";
 
 const router = createBrowserRouter([
   {
