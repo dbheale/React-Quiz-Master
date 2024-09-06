@@ -1,22 +1,21 @@
 import { useSelector } from "react-redux";
-import { RootState } from "../../store";
+import { gameAnswersSelector } from "../../store/selectors";
 
 const ProgressBar = () => {
-  const answers = useSelector((state: RootState) => state.game.answers);
+  const answers = useSelector(gameAnswersSelector);
 
-  console.log(answers);
   return (
     <div className="progress-wrap">
-      {answers?.slice().reverse().map((q) => {
-        if (!q) {
-          return <div key={q} className="question"></div>;
-        }
-        return (
-          <div
-            className={q.correct ? "question correct" : "question incorrect"}
-          ></div>
-        );
-      })}
+      {answers
+        ?.slice()
+        .reverse()
+        .map((q, i) =>
+          q ? (
+            <div key={"q_" + q.questionId} className={q.correct ? "question correct" : "question incorrect"}></div>
+          ) : (
+            <div key={"uq_" + i} className="question"></div>
+          )
+        )}
     </div>
   );
 };

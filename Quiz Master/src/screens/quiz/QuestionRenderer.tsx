@@ -1,24 +1,21 @@
 import { useEffect, useState } from "react";
-import { AppDispatch, RootState } from "../../store";
+import { AppDispatch } from "../../store";
 import { useDispatch, useSelector } from "react-redux";
 import { answerQuestionThunk, updateActiveQuestion } from "../../store/slices/gameSlice";
 import { useNavigate } from "react-router-dom";
-import { Routes } from "../../constants/routes";
+import { Routes } from "../../constants/Routes";
 import { decode } from "html-entities"
+import { audioPlayingSelector, gameSelector } from "../../store/selectors";
 
 const QuestionRenderer = () => {
   const dispatch: AppDispatch = useDispatch();
-  const game = useSelector((state: RootState) => state.game);
-  const audioPlaying = useSelector((state: RootState) => state.audioPlayer.isPlaying);
+  const game = useSelector(gameSelector);
+  const audioPlaying = useSelector(audioPlayingSelector);
   const navigate = useNavigate();
 
   const [isAnswered, setIsAnswered] = useState(false);
 
   useEffect(() => {
-console.log("effect", audioPlaying
-  , game.questions
-  , game.activeQuestion
-  , game.answers)
 
     if (!audioPlaying
       && !game.loading
@@ -29,9 +26,6 @@ console.log("effect", audioPlaying
       const nextIndex = game.activeQuestion.id + 1;
       setIsAnswered(false);
       if (game.questions.length > nextIndex) {
-        console.log(
-          "Dispatching next question."
-        );
         dispatch(
           updateActiveQuestion(game.questions[nextIndex])
         );

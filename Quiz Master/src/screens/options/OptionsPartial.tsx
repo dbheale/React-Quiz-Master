@@ -1,25 +1,22 @@
-import "./ScreenTheFirst.css";
+import "./OptionsPartial.css";
 import ChangePageButton from "../../components/ChangePageButton";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { DescriptiveSelectList } from "../../components/DescriptiveSelectList";
 import { difficulties, types, times } from "../../constants/ValueOptions";
 import { Difficulty, QuestionCounts, QuestionType } from "../../types/Question";
 import { useDispatch, useSelector } from "react-redux";
-import { playAudio, Sounds } from "../../store/slices/audioPlayerSlice";
-import { Routes } from "../../constants/routes";
+import { playAudio } from "../../store/slices/audioPlayerSlice";
+import { Sounds } from "../../constants/Sounds";
+import { Routes } from "../../constants/Routes";
 import { setGameSettings } from "../../store/slices/settingsSlice";
-import { AppDispatch, RootState } from "../../store";
+import { AppDispatch } from "../../store";
 import { startGameThunk } from "../../store/slices/gameSlice";
-import { fetchCategories } from "../../store/slices/categoriesSlice";
+import { categoriesSelector, settingsSelector } from "../../store/selectors";
 
-const ScreenTheFirst = () => {
+const OptionsPartial = () => {
   const dispatch: AppDispatch = useDispatch();
-  const settings = useSelector((state: RootState) => state.settings);
-  const categoryState = useSelector((state: RootState) => state.categories);
-  const categories = [...categoryState.categories];
-  useEffect(() => {
-    dispatch(fetchCategories());
-  }, []);
+  const settings = useSelector(settingsSelector);
+  const categories = useSelector(categoriesSelector);
 
   const [numberOfQuestions, setNumberOfQuestions] = useState(settings.questionCount);
   const [category, setCategory] = useState<string | undefined>(settings.category);
@@ -122,4 +119,4 @@ const ScreenTheFirst = () => {
   );
 };
 
-export default ScreenTheFirst;
+export default OptionsPartial;

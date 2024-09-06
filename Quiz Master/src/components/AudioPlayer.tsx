@@ -1,12 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../store';
 import { resetAudio } from '../store/slices/audioPlayerSlice';
+import { audioSelector } from '../store/selectors';
 
 const AudioPlayer: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const dispatch = useDispatch();
-  const { src, isPlaying } = useSelector((state: RootState) => state.audioPlayer);
+  const { src, isPlaying } = useSelector(audioSelector);
 
   useEffect(() => {
     if (audioRef.current && src) {
@@ -20,7 +20,6 @@ const AudioPlayer: React.FC = () => {
 
   useEffect(() => {
     const handleEnded = () => {
-      console.log("audio reset");
       dispatch(resetAudio());
     };
 

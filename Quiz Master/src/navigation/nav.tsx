@@ -1,15 +1,16 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import ScreenTheFirst from "../screens/options/ScreenTheFirst";
-import ScreenTwo from "../screens/quiz/ScreenTwo";
-import ThirdScreen from "../screens/results/ThirdScreen";
-import FinaleScreen from "../screens/statistics/FinaleScreen";
+import OptionsPartial from "../screens/options/OptionsPartial";
+import QuizPartial from "../screens/quiz/QuizPartial";
+import ResultsPartial from "../screens/results/ResultsPartial";
+import StatisticsPartial from "../screens/statistics/StatisticsPartial";
 import ErrorPage from "../screens/ErrorPage";
 import App from "../App";
 import { Provider } from "react-redux";
-import { store } from "../store";
+import { PersistGate } from "redux-persist/integration/react";
+import { store, persistor } from "../store";
 import AudioPlayer from "../components/AudioPlayer";
-import { Routes } from "../constants/routes";
+import { Routes } from "../constants/Routes";
 
 const router = createBrowserRouter([
   {
@@ -17,18 +18,21 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
-      { index: true, element: <ScreenTheFirst /> },
+      { 
+        index: true, 
+        element: <OptionsPartial /> 
+      },
       {
         path: Routes.Quiz,
-        element: <ScreenTwo />,
+        element: <QuizPartial />,
       },
       {
         path: Routes.Results,
-        element: <ThirdScreen />,
+        element: <ResultsPartial />,
       },
       {
         path: Routes.Statistics,
-        element: <FinaleScreen />,
+        element: <StatisticsPartial />,
       },
     ],
   },
@@ -37,8 +41,10 @@ const router = createBrowserRouter([
 export const RootNavigation = () => {
   return (
     <Provider store={store}>
-      <RouterProvider router={router} />
-      <AudioPlayer />
+      <PersistGate persistor={persistor}>
+        <RouterProvider router={router} />
+        <AudioPlayer />
+      </PersistGate>
     </Provider>
   );
 };

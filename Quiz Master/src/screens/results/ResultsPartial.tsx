@@ -1,16 +1,32 @@
 import ChangePageButton from "../../components/ChangePageButton";
 import OptionSummary from "./OptionSummary";
-import { Routes } from "../../constants/routes";
+import { Routes } from "../../constants/Routes";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../store";
+import { AppDispatch } from "../../store";
 import { clearQuestions, startGameThunk } from "../../store/slices/gameSlice";
 import { clearGameSettings } from "../../store/slices/settingsSlice";
+import { gameAnswersSelector, settingsQuestionCountSelector } from "../../store/selectors";
+import { playAudio } from "../../store/slices/audioPlayerSlice";
+import { Sounds } from "../../constants/Sounds";
+import { useRef } from "react";
 
-const ThirdScreen = () => {
+const ResultsPartial = () => {
   const dispatch: AppDispatch = useDispatch();
-  const answers = useSelector((state: RootState) => state.game.answers);
-  const questionCount = useSelector((state: RootState) => state.settings.questionCount);
-  const correctAnswers = answers?.filter(f => f?.correct === true).length;
+  const answers = useSelector(gameAnswersSelector);
+  const questionCount = useSelector(settingsQuestionCountSelector);
+  const correctAnswers = answers?.filter((f) => f?.correct === true).length;
+  const hasRendered = useRef(false);
+
+  // Just using this so the audio doesn't play on rerender... I don't think it would, but just in case.
+  if(!hasRendered.current){
+
+    const sound = correctAnswers > questionCount / 2 ? Sounds.Summary : Sounds.BadSummary;
+  
+    dispatch(playAudio(sound));
+
+    hasRendered.current = true; 
+  }
+
   const resetQuestions = () => {
     dispatch(clearQuestions());
     dispatch(startGameThunk());
@@ -18,7 +34,7 @@ const ThirdScreen = () => {
   };
 
   const clearGameData = () => {
-    dispatch(clearGameSettings())
+    dispatch(clearGameSettings());
     dispatch(clearQuestions());
     return true;
   };
@@ -42,9 +58,10 @@ const ThirdScreen = () => {
         <ChangePageButton
           text={"Choose another quiz"}
           beforeChange={clearGameData}
-          page={Routes.Home} />
+          page={Routes.Home}
+        />
       </span>
     </>
   );
 };
-export default ThirdScreen;
+export default ResultsPartial;
