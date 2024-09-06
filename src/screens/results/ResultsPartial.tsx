@@ -53,7 +53,7 @@ const ResultsPartial = () => {
         <ChangePageButton
           text={"Restart"}
           beforeChange={resetQuestions}
-          page={"/quiz"}
+          page={Routes.Quiz}
         />
         <ChangePageButton
           text={"Choose another quiz"}
