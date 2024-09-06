@@ -1,4 +1,4 @@
-import "./ScreenTheFirst.css";
+import "./OptionsPartial.css";
 import ChangePageButton from "../../components/ChangePageButton";
 import { ChangeEvent, useState } from "react";
 import { DescriptiveSelectList } from "../../components/DescriptiveSelectList";
@@ -8,14 +8,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { playAudio, Sounds } from "../../store/slices/audioPlayerSlice";
 import { Routes } from "../../constants/routes";
 import { setGameSettings } from "../../store/slices/settingsSlice";
-import { AppDispatch, RootState } from "../../store";
+import { AppDispatch } from "../../store";
 import { startGameThunk } from "../../store/slices/gameSlice";
+import { categoriesSelector, settingsSelector } from "../../store/selectors";
 
-const ScreenTheFirst = () => {
+const OptionsPartial = () => {
   const dispatch: AppDispatch = useDispatch();
-  const settings = useSelector((state: RootState) => state.settings);
-  const categoryState = useSelector((state: RootState) => state.categories);
-  const categories = [...categoryState.categories];
+  const settings = useSelector(settingsSelector);
+  const categories = useSelector(categoriesSelector);
 
   const [numberOfQuestions, setNumberOfQuestions] = useState(settings.questionCount);
   const [category, setCategory] = useState<string | undefined>(settings.category);
@@ -118,4 +118,4 @@ const ScreenTheFirst = () => {
   );
 };
 
-export default ScreenTheFirst;
+export default OptionsPartial;

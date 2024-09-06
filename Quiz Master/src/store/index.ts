@@ -7,24 +7,26 @@ import gameReducer from "./slices/gameSlice";
 import categoriesReducer from "./slices/categoriesSlice";
 import statisticsReducer from "./slices/statisticsSlice";
 
-// Persist configuration for the statistics slice
 const statisticsPersistConfig = {
   key: 'statistics',
   storage,
 };
 
-// Persisted reducer for statistics
 const persistedStatisticsReducer = persistReducer(statisticsPersistConfig, statisticsReducer);
 
-// Single store configuration with all reducers
 export const store = configureStore({
   reducer: {
     audioPlayer: audioPlayerReducer,
     settings: settingsReducer,
     game: gameReducer,
     categories: categoriesReducer,
-    statistics: persistedStatisticsReducer,  // Persisted statistics slice
+    statistics: persistedStatisticsReducer,
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+    serializableCheck: {
+      ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE', 'persist/FLUSH', 'persist/PAUSE', 'persist/PURGE', 'persist/REGISTER'],
+    },
+  }),
 });
 
 export const persistor = persistStore(store);

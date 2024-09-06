@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../../store";
+import { audioPlayingSelector, gameLoadingSelector } from "../../store/selectors";
 
 export type QuestionTimerArgs = {
   onExpiry: () => void;
@@ -12,8 +12,8 @@ const QuestionTimer: React.FC<QuestionTimerArgs> = ({
   timeInMinutes,
 }) => {
   const [time, setTime] = useState(timeInMinutes * 60);
-  const audioPlaying = useSelector((state: RootState) => state.audioPlayer.isPlaying);
-  const isLoading = useSelector((state: RootState) => state.game.loading);
+  const audioPlaying = useSelector(audioPlayingSelector);
+  const isLoading = useSelector(gameLoadingSelector);
   const timerId = useRef<number | null>(null);
 
   useEffect(() => {

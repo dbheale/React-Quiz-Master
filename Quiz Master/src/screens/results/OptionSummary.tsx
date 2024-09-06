@@ -1,10 +1,10 @@
 import { useSelector } from "react-redux";
 import { types, times, difficulties } from "../../constants/ValueOptions";
-import { RootState } from "../../store";
+import { categoriesSelector, settingsSelector } from "../../store/selectors";
 
 const OptionSummary = () => {
-  const gameSettings = useSelector((state: RootState) => state.settings);
-  const categories = useSelector((state: RootState) => state.categories.categories);
+  const gameSettings = useSelector(settingsSelector);
+  const categories = useSelector(categoriesSelector);
   return (
     <div className="config-summary">
       <p>Config</p>

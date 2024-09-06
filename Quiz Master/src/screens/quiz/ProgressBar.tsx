@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
-import { RootState } from "../../store";
+import { gameAnswersSelector } from "../../store/selectors";
 
 const ProgressBar = () => {
-  const answers = useSelector((state: RootState) => state.game.answers);
+  const answers = useSelector(gameAnswersSelector);
 
   return (
     <div className="progress-wrap">

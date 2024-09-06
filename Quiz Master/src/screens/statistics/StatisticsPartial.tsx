@@ -2,18 +2,18 @@ import { useDispatch, useSelector } from "react-redux";
 import ChangePageButton from "../../components/ChangePageButton";
 import { Routes } from "../../constants/routes";
 import { resetStatistics } from "../../store/slices/statisticsSlice";
-import { RootState } from "../../store";
+import { statisticsSelector } from "../../store/selectors";
 
-const FinaleScreen = () => {
-  const stats = useSelector((state: RootState) => state.statistics);
+const StatisticsPartial = () => {
+  const stats = useSelector(statisticsSelector);
   const dispatch = useDispatch();
 
   const handleReset = () => {
     dispatch(resetStatistics()); // Resets the persisted statistics
   };
 
-  console.log("stats:", stats)
-
+  //console.log("stats:", stats)
+  
   return (
     <>
       <span className="flex-span">
@@ -23,4 +23,4 @@ const FinaleScreen = () => {
     </>
   );
 };
-export default FinaleScreen;
+export default StatisticsPartial;

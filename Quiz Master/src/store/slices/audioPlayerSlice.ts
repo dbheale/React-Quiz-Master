@@ -5,7 +5,8 @@ export const Sounds = {
   OneMinute: "./src/assets/one-minute-left.mp3",
   Correct: "./src/assets/correct.mp3",
   Wrong: "./src/assets/wrong.mp3",
-  Start: "./src/assets/game-start.mp3"
+  Start: "./src/assets/game-start.mp3",
+  Summary: "./src/assets/summary.mp3",
 }
 
 interface AudioPlayerState {

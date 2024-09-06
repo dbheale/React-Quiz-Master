@@ -2,15 +2,20 @@ import ChangePageButton from "../../components/ChangePageButton";
 import OptionSummary from "./OptionSummary";
 import { Routes } from "../../constants/routes";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../store";
+import { AppDispatch } from "../../store";
 import { clearQuestions, startGameThunk } from "../../store/slices/gameSlice";
 import { clearGameSettings } from "../../store/slices/settingsSlice";
+import { gameAnswersSelector, settingsQuestionCountSelector } from "../../store/selectors";
+import { playAudio, Sounds } from "../../store/slices/audioPlayerSlice";
 
-const ThirdScreen = () => {
+const ResultsPartial = () => {
   const dispatch: AppDispatch = useDispatch();
-  const answers = useSelector((state: RootState) => state.game.answers);
-  const questionCount = useSelector((state: RootState) => state.settings.questionCount);
+  const answers = useSelector(gameAnswersSelector);
+  const questionCount = useSelector(settingsQuestionCountSelector);
   const correctAnswers = answers?.filter(f => f?.correct === true).length;
+
+dispatch(playAudio(Sounds.Summary))
+
   const resetQuestions = () => {
     dispatch(clearQuestions());
     dispatch(startGameThunk());
@@ -47,4 +52,4 @@ const ThirdScreen = () => {
     </>
   );
 };
-export default ThirdScreen;
+export default ResultsPartial;

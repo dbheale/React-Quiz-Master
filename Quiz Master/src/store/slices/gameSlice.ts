@@ -146,6 +146,9 @@ const gameSlice = createSlice({
       state.loading = true;
       //console.log("Game starting");
     });
+    builder.addCase(startGameThunk.rejected, (_, action) => {
+      console.log("Game start failed", action.error.message);
+    });
     builder.addCase(answerQuestionThunk.fulfilled, () => {
       //console.log("Question answered");
     });

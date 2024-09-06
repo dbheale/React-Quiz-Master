@@ -1,19 +1,19 @@
-import "./ScreenTwo.css";
+import "./QuizPartial.css";
 import ProgressBar from "./ProgressBar";
 import ChangePageButton from "../../components/ChangePageButton";
 import QuestionRenderer from "./QuestionRenderer";
 import QuestionTimer from "./QuestionTimer";
 import { Routes } from "../../constants/routes";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../store";
 import { useNavigate } from "react-router-dom";
 import { clearQuestions } from "../../store/slices/gameSlice";
 import { clearGameSettings } from "../../store/slices/settingsSlice";
+import { settingsTimeLimitSelector } from "../../store/selectors";
 
-const ScreenTwo = () => {
+const QuizPartial = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const timeLimit = useSelector((state: RootState) => state.settings.timeLimit);
+  const timeLimit = useSelector(settingsTimeLimitSelector);
 
   const routeToResults = () => {
     navigate(Routes.Results);
@@ -43,4 +43,4 @@ const ScreenTwo = () => {
   );
 };
 
-export default ScreenTwo;
+export default QuizPartial;

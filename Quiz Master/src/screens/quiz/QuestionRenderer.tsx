@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
-import { AppDispatch, RootState } from "../../store";
+import { AppDispatch } from "../../store";
 import { useDispatch, useSelector } from "react-redux";
 import { answerQuestionThunk, updateActiveQuestion } from "../../store/slices/gameSlice";
 import { useNavigate } from "react-router-dom";
 import { Routes } from "../../constants/routes";
 import { decode } from "html-entities"
+import { audioPlayingSelector, gameSelector } from "../../store/selectors";
 
 const QuestionRenderer = () => {
   const dispatch: AppDispatch = useDispatch();
-  const game = useSelector((state: RootState) => state.game);
-  const audioPlaying = useSelector((state: RootState) => state.audioPlayer.isPlaying);
+  const game = useSelector(gameSelector);
+  const audioPlaying = useSelector(audioPlayingSelector);
   const navigate = useNavigate();
 
   const [isAnswered, setIsAnswered] = useState(false);
