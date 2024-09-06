@@ -1,6 +1,8 @@
+const base = window.location.pathname.split("/").slice(0, -1).join("/");
+
 export const Routes = {
-    Home: "/",
-    Quiz: "/quiz",
-    Results: "/results",
-    Statistics: "/stats"
+    Home: base + "/",
+    Quiz: base + "/quiz",
+    Results: base + "/results",
+    Statistics: base + "/stats"
 }
