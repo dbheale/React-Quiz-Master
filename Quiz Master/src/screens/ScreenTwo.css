@@ -6,7 +6,7 @@
   margin-bottom: 10px;
 }
 
-.answer-wrap button{
+.answer-wrap button {
   margin: 5px;
   flex: 45%;
   font-size: smaller;
@@ -20,4 +20,22 @@
 
 .wrapper p {
   text-align: left;
+}
+
+.end-modal {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+  position: absolute;
+  inset: 150px;
+  border: 1px solid rgb(204, 204, 204);
+  overflow: auto;
+  border-radius: 4px;
+  outline: none;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
 }

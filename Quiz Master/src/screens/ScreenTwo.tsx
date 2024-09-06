@@ -1,88 +1,14 @@
-import { useState } from "react";
-import QuestionTimer from "../QuestionTimer";
 import "./ScreenTwo.css";
 import ProgressBar from "../ProgressBar";
-import ChangePageButton from "../ChangePageButton";
-import { useGameContext } from "../hooks/GameContext";
-
-const QuestionRenderer = () => {
-  const context = useGameContext();
-
-  if (context.activeQuestion === undefined) return;
-
-  const [answerIsCorrect, setAnswerState] = useState<boolean | undefined | null>(
-    undefined
-  );
-
-  const onAnswerSelected = (
-    e?: React.MouseEvent<HTMLButtonElement, MouseEvent>, value?: string
-  ) => {
-    if (answerIsCorrect !== undefined) return; // not answered yet
-
-    if (context.activeQuestion?.question === undefined
-      || context.activeQuestion?.number === undefined) return; // why is the state messed up?
-
-    let res = false;
-    if (e && value) { // the event is a user clicking on a button
-      res = context.activeQuestion.question.answer == value;
-    }
-    context.setAnswer(context.activeQuestion.number, res);
-    if (e === null) { // timed out so the event is null
-      setAnswerState(e);
-      return;
-    }
-    setAnswerState(res);
-  };
-
-  const nextQuestion = () => {
-    setAnswerState(undefined);
-    context.nextQuestion();
-  }
-
-  return (
-    <div className="question-wrap">
-      <p>
-        {context.activeQuestion?.number}.{" "}
-        {context.activeQuestion.question?.question}
-      </p>
-      <div className="answer-wrap">
-        {context.activeQuestion.question?.options?.map((option, index) => (
-          <button onClick={(e => onAnswerSelected(e, option))} key={option + index}>
-            {option}
-          </button>
-        ))}
-      </div>
-      {answerIsCorrect === undefined ? (
-        <QuestionTimer
-          timeInMinutes={context.options?.timeLimit??1}
-          onExpiry={() => onAnswerSelected()}
-        />
-      ) : (
-        <span>
-          <p className="answer">
-            {answerIsCorrect === null ? (
-              <span>Time's up! {context.activeQuestion.question?.reason}</span>
-            ) : answerIsCorrect ? (
-              <span>Correct! {context.activeQuestion.question?.reason}</span>
-            ) : (
-              <span>Wrong! {context.activeQuestion.question?.reason}</span>
-            )}
-            {context.options?.questionCount ?? 0 > (context.activeQuestion.number ?? 0)
-            ? <button onClick={nextQuestion}>Next Question =&gt;</button>
-            : <button onClick={() => context.setPage(2)}>View Results</button>}
-          </p>
-        </span>
-      )}
-    </div>
-  );
-};
+import ChangePageButton from "../components/ChangePageButton";
+import QuestionRenderer from "../components/QuestionRenderer";
 
 const ScreenTwo = () => {
   return (
     <div className="wrapper">
       <QuestionRenderer />
       <span className="flex-span">
-        <ChangePageButton text={"End quiz"} pageIndex={0} />
+        <ChangePageButton text={"End quiz"} page={'/'} prompt={true} />
         <ProgressBar />
       </span>
     </div>
