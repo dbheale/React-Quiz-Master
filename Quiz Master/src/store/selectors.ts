@@ -14,3 +14,4 @@ export const settingsQuestionCountSelector = (state: RootState) => state.setting
 export const categoriesSelector = (state: RootState) => state.categories.categories;
 
 export const statisticsSelector = (state: RootState) => state.statistics;
+export const categoryStatisticsSelector = (state: RootState) => state.statistics.questionsByCategory
