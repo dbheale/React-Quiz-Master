@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { answerQuestionThunk, updateActiveQuestion } from "../../store/slices/gameSlice";
 import { useNavigate } from "react-router-dom";
 import { Routes } from "../../constants/Routes";
-import { decode } from "html-entities"
+import { decode } from "html-entities";
 import { audioPlayingSelector, gameSelector } from "../../store/selectors";
+import { AnimatePresence, motion } from "framer-motion";
 
 const QuestionRenderer = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -36,7 +37,7 @@ const QuestionRenderer = () => {
   }, [game, audioPlaying]);
 
   const onAnswerSelected = (value: string) => {
-    if(isAnswered) return;
+    if (isAnswered) return;
     setIsAnswered(true);
     dispatch(answerQuestionThunk(value));
   };
@@ -50,21 +51,41 @@ const QuestionRenderer = () => {
   }
 
   return (
-    <div className="question-wrap">
-      <p>
-        {(game.activeQuestion.id + 1)}. {decode(game.activeQuestion.question)}
-      </p>
-      <p>
-        {decode(game.activeQuestion.category)} ({game.activeQuestion.difficulty})
-      </p>
-      <div className="answer-wrap">
-        {game.activeQuestion.options?.map((option, index) => (
-          <button className={isAnswered ? (option === game.activeQuestion?.answer ? "correct" : "incorrect") : undefined} key={option + index} onClick={() => onAnswerSelected(option)}>
-            {decode(option)}
-          </button>
-        ))}
-      </div>
-    </div>
+    <AnimatePresence mode="wait" initial={false}>
+      <motion.div
+        key={game.activeQuestion.id}
+        initial={{ opacity: 0, x: 150 }}
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0, x: -150 }}
+        transition={{ ease: "easeOut", duration: 1 }}
+        className="question-wrap"
+      >
+        <p>
+          {game.activeQuestion.id + 1}. {decode(game.activeQuestion.question)}
+        </p>
+        <p>
+          {decode(game.activeQuestion.category)} (
+          {game.activeQuestion.difficulty})
+        </p>
+        <div className="answer-wrap">
+          {game.activeQuestion.options?.map((option, index) => (
+            <button
+              className={
+                isAnswered
+                  ? option === game.activeQuestion?.answer
+                    ? "correct"
+                    : "incorrect"
+                  : undefined
+              }
+              key={option + index}
+              onClick={() => onAnswerSelected(option)}
+            >
+              {decode(option)}
+            </button>
+          ))}
+        </div>
+      </motion.div>
+    </AnimatePresence>
   );
 };
 
