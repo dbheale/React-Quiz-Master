@@ -17,9 +17,7 @@ const settingsSlice = createSlice({
       state.timeLimit = action.payload.timeLimit;
       state.type = action.payload.type;
     },
-    clearGameSettings: (state) => {
-      state = initialState;
-    },
+    clearGameSettings: () => initialState,
   },
 });
 
