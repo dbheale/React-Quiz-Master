@@ -5,6 +5,10 @@
   text-align: center;
 }
 
+ul li{
+  text-align: left;
+}
+
 .logo {
   position: fixed;
   left: 0;
@@ -21,6 +25,7 @@
   align-items: center;
   display: flex;
   width: 100%;
+  margin: auto 30px;
 }
 
 .config-summary{

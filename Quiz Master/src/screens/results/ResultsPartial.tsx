@@ -60,6 +60,10 @@ const ResultsPartial = () => {
           beforeChange={clearGameData}
           page={Routes.Home}
         />
+        <ChangePageButton
+          text={"See my statistics"}
+          page={Routes.Statistics}
+        />
       </span>
     </>
   );
